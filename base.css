@@ -1,5 +1,6 @@
-* {
+body {
     margin: 0;
+    font: 13px/2.3 'lucida grande','lucida sans unicode',Verdana,Tahoma,Arial,sans-serif;
 }
 #id code {
     background-color: #ffffff;
@@ -37,5 +38,6 @@
 }
 
 #content {
+    line-height:1.4em;
     margin-left: 160px;
 }
