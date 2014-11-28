@@ -142,16 +142,18 @@
     ;(gen-about-sites)
     ))
 
-(defn -main []
+(defn -main
+  [& {watch? "--watch"}]
   (build-blog)
-  (future
-    (start-watch [{:path (:in-dir config)
-                   :event-types [:create :modify :delete]
-                   :bootstrap (fn [path] (println "Starting to watch" path))
-                   :callback (fn [event filename]
-                               (println event filename)
-                               (build-blog))
-                   :options {:recursive true}}])))
+  (when watch?
+    (future
+      (start-watch [{:path (:in-dir config)
+                     :event-types [:create :modify :delete]
+                     :bootstrap (fn [path] (println "Starting to watch" path))
+                     :callback (fn [event filename]
+                                 (println event filename)
+                                 (build-blog))
+                     :options {:recursive true}}]))))
 
 
 (defn- add-wildcard
