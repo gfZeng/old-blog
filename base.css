@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+}
+#id code {
+    background-color: #ffffff;
+    color: #0383c9;
+}
+
+#id code .ns {
+    font-size: 14px;
+    font-style: italic;
+}
+
+#container {
+    margin-left: 30px;
+    margin-top: 35px;
+    width: 700px;
+}
+
+#nav {
+    width: 133px;
+    float: left;
+    position: fixed;
+    left: 30px;
+    top: 40px;
+}
+
+#classes a{
+    text-decoration: none;
+    color: #ffffff;
+}
+#classes li {
+    margin-top: 3px;
+    width: 90px;
+    background: #666699;
+    text-indent: 7px;
+}
+
+#content {
+    margin-left: 160px;
+}

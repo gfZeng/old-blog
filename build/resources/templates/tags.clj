@@ -1,0 +1,8 @@
+[:div
+ (for [[date ms] (sort-by key classes)]
+   (list
+    [:h4 {:style "margin-top: 28px;"} date] 
+    [:ul {:style "list-style: none; margin-top: 7px;"}
+     (for [m ms]
+       [:li [:a {:href (:post-uri m)} (:title m)]])]))]
+
