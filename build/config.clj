@@ -1,1 +1,2 @@
-{:out-dir ".."}
+{:out-dir ".."
+ :dev? false}
