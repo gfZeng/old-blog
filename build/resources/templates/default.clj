@@ -28,7 +28,7 @@
         [:a {:href "/archives"} [:li {} "Archives"]]
         [:a {:href "/about"} [:li {} "About"]]]]]
      [:div#content
-      [:h3 {} (:title metadata)]
+      [:h3 {:style "letter-spacing: 0.2em;"} (:title metadata)]
       [:div {:style "margin: 30px 0 100px 0;"}
        content]
       [:div {:id "disqus"}
