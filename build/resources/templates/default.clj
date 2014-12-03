@@ -2,6 +2,7 @@
 (let [[metadata content] ((juxt :metadata :content) *body*)]
   [:html
    [:head]
+   [:link {:rel "shortcut icon" :href "/arch-clojure_logo.png"}]
    (hiccup.page/include-js "/highlight.pack.js")
    (hiccup.page/include-css "/styles/default.css")
    (hiccup.page/include-css "/base.css")
