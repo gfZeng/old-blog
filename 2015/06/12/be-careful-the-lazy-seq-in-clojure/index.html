@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><link href="/arch-clojure_logo.png" rel="shortcut icon" /><script src="/highlight.pack.js" type="text/javascript"></script><link href="/styles/default.css" rel="stylesheet" type="text/css" /><link href="/base.css" rel="stylesheet" type="text/css" /><title>当心 Clojure 的 lazy-seq</title></head><body><div id="container"><div id="nav"><div id="id"><a href="#" onclick="javascript:window.location = window.location.origin" style="cursor: pointer; text-decoration: none;"><pre><code class="clojure">(ns<span class="ns"> isaac.zeng</span>)</code></pre></a></div><div id="classes" style="margin-top: 16px;"><ul style="list-style: none; padding-left: 10px;"><a href="/"><li>Home</li></a><a href="/tags"><li>Tags</li></a><a href="/archives"><li>Archives</li></a><a href="/about"><li>About</li></a></ul></div></div><div id="content"><h3>当心 Clojure 的 lazy-seq</h3><div style="margin: 30px 0 100px 0;"><p>Clojure 这门语言的优雅之处自然离不开 lazy sequence， clojure.core 核心库里面 很多函数返回值是 lazy-seq（比如 map, filter)。</p><h4>lazy sequence 的好处</h4><ol><li>先一睹为快， 使用 lazy-cat 定义 Fibonacci 数列。<pre><code class="clojure">&#40;def fib-seq &#40;lazy-cat &#91;0 1&#93; &#40;map + fib-seq &#40;rest fib-seq&#41;&#41;&#41;&#41;
+</code></pre></li><li>结合 map<pre><code class="clojure">&#91;x y z ,,,&#93; =&gt; &#91;&#91;x 0&#93; &#91;y 1&#93; &#91;z 2&#93; ,,,&#93;
+;; &#40;range&#41; 返回无穷整数序列， 如果直接获取他的值， 会内存溢出。
+&#40;defn conj-position &#91;xs&#93;
+  &#40;map #&#40;do &#91;%1 %2&#93;&#41; xs &#40;range&#41;&#41;&#41;
+</code></pre></li></ol><h4>lazy sequence 的缺陷（不能算是缺陷，是特性）</h4><ol><li>带走异常<pre><code class="clojure">;; 定义时候不发生异常， 使用的时候发生异常， 使用的时候一定注意。
+;; 有时会抛出莫名奇妙的错误， 找不到出错点。
+user&gt;  &#40;def a &#40;for &#91;i &#40;range 10&#41;&#93; &#40;/ 1 i&#41;&#41;&#41;
+;; =&gt; #'user/a
+user&gt; a
+ArithmeticException Divide by zero  clojure.lang.Numbers.divide &#40;Numbers.java:156&#41;
+user&gt; 
+</code></pre></li><li>binding 上下文环境失效<pre><code class="clojure">;; map 返回 lazy sequence， 到使用时才运算， 在这个例子中，计算
+;; vs 的值的时候， 已经脱离了 &#40;binding &#91;&#42;x&#42; 7&#93;&#41; 的环境.
+user&gt; &#40;def &#94;:dynamic &#42;x&#42; 3&#41;
+;; =&gt; #'user/&#42;x&#42;
+user&gt; 
+user&gt; &#40;def vs &#40;binding &#91;&#42;x&#42; 7&#93; &#40;map #&#40;+ &#42;x&#42; %&#41; &#40;range 10&#41;&#41;&#41;&#41;
+;; =&gt; #'user/vs
+user&gt; vs
+;; =&gt; &#40;3 4 5 6 7 8 9 10 11 12&#41;
+;;
+;; mapv 返回的不是 lazy sequence
+user&gt; &#40;def vs &#40;binding &#91;&#42;x&#42; 7&#93; &#40;mapv #&#40;+ &#42;x&#42; %&#41; &#40;range 10&#41;&#41;&#41;&#41;
+;; =&gt; #'user/vs
+user&gt; vs
+;; =&gt; &#91;7 8 9 10 11 12 13 14 15 16&#93;
+;;
+;; let 绑定动态  &#42;x&#42; 到 lexical's variable x, 形成闭包。 
+user&gt; &#40;def vs &#40;binding &#91;&#42;x&#42; 7&#93; &#40;let &#91;x &#42;x&#42;&#93; &#40;map #&#40;+ x %&#41; &#40;range 10&#41;&#41;&#41;&#41;&#41;
+;; =&gt; #'user/vs
+user&gt; vs
+;; =&gt; &#40;7 8 9 10 11 12 13 14 15 16&#41;
+user&gt; 
+</code></pre></li></ol></div><div id="disqus"><div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'isaac-zeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div></div><script type="text/javascript">hljs.initHighlightingOnLoad();</script></div></body></html>
