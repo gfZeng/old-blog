@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    font: 13px/2.3 'lucida grande','Microsoft Yahei','lucida sans unicode',Verdana,Tahoma,Arial,sans-serif;
+    /*font: 13px/2.3 'lucida grande','Microsoft Yahei','lucida sans unicode',Verdana,Tahoma,Arial,sans-serif;*/
+    font: 13px/1.5 arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif
 }
 #id code {
     background-color: #ffffff;
