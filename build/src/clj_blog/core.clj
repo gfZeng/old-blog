@@ -50,7 +50,7 @@
                      (map #(str/split % #"\s*:\s*" 2) $)
                      (map #(do [(keyword (first %)) (second %)]) $)
                      (into {} $))
-     :content (md-to-html-string c-str)}))
+     :content (md-to-html-string c-str :reference-links? true)}))
 
 (defn build-archive [m]
   (let [month-str (.substring (:date-str m) 0 7)]
@@ -125,7 +125,7 @@
                               (-> f
                                   (.replace "resources/sites/" "/about/")
                                   (.replace ".md" ".html")))]]
-    (str-dump out-path (md-to-html-string (slurp f)))))
+    (str-dump out-path (md-to-html-string (slurp f) :reference-links? true))))
 
 (defn build-blog []
   (reset! ARCHIVES {})
