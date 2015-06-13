@@ -84,5 +84,10 @@ foo(3, -4) #=> x + y <= 0
 就可以实现了。然后我沉默了， 继续写我的程序。 对，他们说的没错， 对机器来说， 都是
 分支选择。但是从优雅性， 可扩展性， 易读性（尤其是大型分发系统）来说，聪明的人都看的出来。
 
+#### BTW:
+我用 Python 实现了很多 Clojure 特有的好用函数， pmap(并发性的 map), memoize, timing, once 等，
+有兴趣的可以看看 <https://github.com/gfZeng/util/blob/master/python/util.py>。
+once 这个 function（decorator) 值得一提， 他是特意解决 Python 丑陋的 global。有时间会单独说说。
+
 [1]: https://en.wikipedia.org/wiki/Dynamic_dispatch    
 [2]: https://en.wikipedia.org/wiki/Multiple_dispatch

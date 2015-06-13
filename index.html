@@ -50,7 +50,7 @@ def foo&#40;x, y&#41;:
 ## test it
 foo&#40;3, 4&#41; #=&gt; x + y &gt; 0                
 foo&#40;3, -4&#41; #=&gt; x + y &lt;= 0                
- </code></pre></p><p>上述 Python 例子中同时使用参数 x, y 做分发。lambda x, y: x + y > 0 作为选择函数， 根据 x + y 是否大于 0 来确定分发到哪一个具体实现。      <br /></p><p><a href='https://en.wikipedia.org/wiki/Dynamic_dispatch'>Dynamic Dispatch</a> 这一实现可以用到很多地方，系统架构设计， 数据库设计， 其中最为常见的就是 web 编程中 url dispatcher。</p><p>我曾经展示个上述例子给我几个同事看过，有几个看完后， 抛出一个斜眼， 这个 if-else 就可以实现了。然后我沉默了， 继续写我的程序。 对，他们说的没错， 对机器来说， 都是 分支选择。但是从优雅性， 可扩展性， 易读性（尤其是大型分发系统）来说，聪明的人都看的出来。</p></div><div id="disqus"><div id="disqus_thread"></div>
+ </code></pre></p><p>上述 Python 例子中同时使用参数 x, y 做分发。lambda x, y: x + y > 0 作为选择函数， 根据 x + y 是否大于 0 来确定分发到哪一个具体实现。      <br /></p><p><a href='https://en.wikipedia.org/wiki/Dynamic_dispatch'>Dynamic Dispatch</a> 这一实现可以用到很多地方，系统架构设计， 数据库设计， 其中最为常见的就是 web 编程中 url dispatcher。</p><p>我曾经展示个上述例子给我几个同事看过，有几个看完后， 抛出一个斜眼， 这个 if-else 就可以实现了。然后我沉默了， 继续写我的程序。 对，他们说的没错， 对机器来说， 都是 分支选择。但是从优雅性， 可扩展性， 易读性（尤其是大型分发系统）来说，聪明的人都看的出来。</p><h4>BTW:</h4>我用 Python 实现了很多 Clojure 特有的好用函数， pmap(并发性的 map), memoize, timing, once 等，有兴趣的可以看看 <a href="https://github.com/gfZeng/util/blob/master/python/util.py">https://github.com/gfZeng/util/blob/master/python/util.py</a>。once 这个 function（decorator) 值得一提， 他是特意解决 Python 丑陋的 global。有时间会单独说说。</div><div id="disqus"><div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'isaac-zeng'; // required: replace example with your forum shortname
