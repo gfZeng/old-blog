@@ -40,8 +40,10 @@ user> (defmulti greet :language)
 ``` 
 
 我靠， 上面的 Clojure 例子并没有体现出 [Multiple Dispatch][2] 的特性，
-不过没有关系， 了解 Clojure 的不用说了， 我们马上用 Python 来实现
-这一机制，看完就知道。不多说， 上代码。
+不过没有关系， 了解 Clojure 的不用说了。 我们马上用 Python 来实现
+这一机制，看完就知道。说明一下， Python 的实现 defmulti
+这一想法是偶然看到一篇博客提及，但是后来去找的时候， 找不着了， 所以自己
+实现了一个。 如果你看了，觉得我偷了你的想法那就是你了。
 ```python
 def defmulti(switcher_fn):
     def dispatcher(*args, **kwargs):
