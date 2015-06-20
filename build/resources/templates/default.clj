@@ -50,5 +50,6 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href=\"http://disqus.com/?ref_noscript\">comments powered by Disqus.</a></noscript>
     "))]]
-      [:script {:type "text/javascript"}
-       "hljs.initHighlightingOnLoad();"]]]])
+     [:script {:type "text/javascript"}
+      "hljs.initHighlightingOnLoad();"]]
+    (hiccup.page/include-js "/base.js")]])
