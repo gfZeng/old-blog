@@ -1,5 +1,5 @@
 ---
-title: 当心 Clojure 的 lazy-seq
+title: 当心 Clojure 的 lazy sequence
 tags: Clojure
 ---
 
